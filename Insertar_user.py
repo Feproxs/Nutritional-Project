@@ -8,15 +8,15 @@ key = os.getenv("SUPABASE_KEY")
 
 supabase = create_client(url, key)
 
-nuevo_usuario = {
+usuario = {
+    "email": "marcosportillop03@gmail.com",
     "Name": "Marcos",
-    "Weight": 75,
-    "Height": 178,
+    "Weight": 88,
+    "Height": 181,
     "Objective": "ganar masa muscular",
-    "Activity": "5"
+    "Activity": 5
 }
 
+resultado = supabase.table("USERS").upsert(usuario, on_conflict="email").execute()
 
-resultado = supabase.table("USERS").insert(nuevo_usuario).execute()
-
-print("Usuario insertado:", resultado.data)
+print("Usuario actualizado/insertado:", resultado.data)
